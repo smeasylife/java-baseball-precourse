@@ -128,3 +128,21 @@
 ## 📝 License
 
 This project is [MIT](https://github.com/woowacourse/java-baseball-precourse/blob/master/LICENSE) licensed.
+
+<br>
+---
+
+## 기능 구현 목록
+컨트롤러 기능
+1. Randoms 클래스 활용해서 임의의 숫자 생성하는 함수
+2. Consoles 클래스 활용해서 유저에게 숫자 입력을 받는 함수
+3. 입력받은 함수와 정답을 비교하는 함수
+4. 재시작 또는 게임 종료를 받아들이는 함수
+
+모델 기능
+1. 비교했을 때 볼과 스트라이크 여부의 메시지를 출력하는 함수
+2. 재시작 또는 게임 종료 메시지를 출력하는 함수
+
+
+
+
