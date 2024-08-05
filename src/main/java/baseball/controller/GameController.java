@@ -1,14 +1,19 @@
 package baseball.controller;
 
 import baseball.model.AnswerNumber;
+import baseball.model.InputNumber;
+import baseball.view.InputMessage;
+import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-    public static void run(){
+    private static final InputMessage inputMessage = new InputMessage();
+    public void run(){
         AnswerNumber answer = new AnswerNumber(generateNumber());
+        InputNumber inputNumber = new InputNumber(getNumber());
     }
 
     private static List generateNumber(){
@@ -23,4 +28,11 @@ public class GameController {
         }
         return numList;
     }
+    private static String getNumber(){
+        inputMessage.inputNumMessage();
+        String numbers = Console.readLine();
+        return numbers;
+    }
+
+
 }
