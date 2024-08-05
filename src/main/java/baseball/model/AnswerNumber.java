@@ -9,4 +9,7 @@ public class AnswerNumber {
 
         this.answerNumber = answer;
     }
+    public List<Integer> getAnswerNumber(){
+        return answerNumber;
+    }
 }

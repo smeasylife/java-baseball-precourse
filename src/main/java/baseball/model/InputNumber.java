@@ -11,6 +11,9 @@ public class InputNumber {
         List<Integer> numList = stringToIntList(input);
         this.inputNumber = numList;
     }
+    public List<Integer> getInputNumber(){
+        return inputNumber;
+    }
     private static List stringToIntList(String numbers){
         List<Integer> numList = new ArrayList<>();
 
