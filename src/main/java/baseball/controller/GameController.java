@@ -13,10 +13,13 @@ import java.util.List;
 public class GameController {
     private static final InputMessage inputMessage = new InputMessage();
     private static final OutputMessage outputMessage = new OutputMessage();
-    public void run(){
+    public static void run(){
         AnswerNumber answer = new AnswerNumber(generateNumber());
         InputNumber inputNumber = new InputNumber(getNumber());
+
         play(answer.getAnswerNumber(),inputNumber.getInputNumber());
+
+        endOrRestart();
     }
 
     private static List generateNumber(){
@@ -56,5 +59,32 @@ public class GameController {
                 break;
             }
         }
+    }
+
+    private static void endOrRestart(){
+        inputMessage.endOrRestartMessage();
+        String num = Console.readLine();
+        validate(num);
+        if (num == "1"){
+            run();
+        }
+    }
+    private static void validate(String num){
+        isDigit(num);
+        checkLengthIs1(num);
+    }
+    private static boolean isDigit(String numbers){
+        for(char number: numbers.toCharArray()){
+            if(!Character.isDigit(number)){
+                throw new IllegalArgumentException();
+            }
+        }
+        return true;
+    }
+    public static boolean checkLengthIs1(String numbers){
+        if(numbers.length() != 1){
+            throw new IllegalArgumentException();
+        }
+        return true;
     }
 }

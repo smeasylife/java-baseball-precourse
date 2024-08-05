@@ -1,15 +1,15 @@
 package baseball.view;
 
 public class OutputMessage {
-    public boolean printResultMessage(int ball, int strike){
-        if(strike == 3){
+    public boolean printResultMessage(int ball, int strike) {
+        if (strike == 3) {
             strikeAll();
             return true;
-        }else if (ball == 0 && strike == 0){
+        } else if (ball == 0 && strike == 0) {
             nothing();
             return false;
-        }else{
-            ballAndStrike(ball,strike);
+        } else {
+            ballAndStrike(ball, strike);
             return false;
         }
     }
