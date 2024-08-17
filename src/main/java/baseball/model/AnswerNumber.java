@@ -3,7 +3,7 @@ package baseball.model;
 import java.util.List;
 
 public class AnswerNumber {
-    private List answerNumber;
+    private List<Integer> answerNumber;
 
     public AnswerNumber(List answer){
 

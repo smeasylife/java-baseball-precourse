@@ -14,15 +14,17 @@ public class GameController {
     private final InputMessage inputMessage = new InputMessage();
     private final OutputMessage outputMessage = new OutputMessage();
     public void run(){
-        AnswerNumber answer = new AnswerNumber(generateAnswerNumber());
+        AnswerNumber answer = new AnswerNumber(generateAnswerList());
         InputNumber inputNumber = new InputNumber(getNumber());
 
         play(answer.getAnswerNumber(),inputNumber.getInputNumber());
 
-        endOrRestart();
+        if (isRestart()) {
+            run();
+        }
     }
 
-    private List generateAnswerNumber(){
+    private List generateAnswerList(){
         List<Integer> numList = new ArrayList<>();
         numList.add(Randoms.pickNumberInRange(1,9));
 
@@ -73,16 +75,18 @@ public class GameController {
         while (compareAndReturnResult(answer,input)){
             InputNumber inputNumber = new InputNumber(getNumber());
             input = inputNumber.getInputNumber();
+            System.out.println(input.toString());
         }
     }
 
-    private void endOrRestart(){
+    private boolean isRestart(){
         inputMessage.endOrRestartMessage();
         String num = Console.readLine();
         validate(num);
-        if (num == "1"){
-            run();
+        if (num.equals("1")){
+            return true;
         }
+        return false;
     }
     private void validate(String num){
         isDigit(num);
