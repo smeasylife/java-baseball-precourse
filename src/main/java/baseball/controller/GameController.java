@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-    private static final InputMessage inputMessage = new InputMessage();
-    private static final OutputMessage outputMessage = new OutputMessage();
-    public static void run(){
-        AnswerNumber answer = new AnswerNumber(generateNumber());
+    private final InputMessage inputMessage = new InputMessage();
+    private final OutputMessage outputMessage = new OutputMessage();
+    public void run(){
+        AnswerNumber answer = new AnswerNumber(generateAnswerNumber());
         InputNumber inputNumber = new InputNumber(getNumber());
 
         play(answer.getAnswerNumber(),inputNumber.getInputNumber());
@@ -22,7 +22,7 @@ public class GameController {
         endOrRestart();
     }
 
-    private static List generateNumber(){
+    private List generateAnswerNumber(){
         List<Integer> numList = new ArrayList<>();
         numList.add(Randoms.pickNumberInRange(1,9));
 
@@ -34,34 +34,49 @@ public class GameController {
         }
         return numList;
     }
-    private static String getNumber(){
+    private String getNumber(){
         inputMessage.inputNumMessage();
         String numbers = Console.readLine();
         return numbers;
     }
-    public static boolean compareAndReturnResult(List answer, List input){
+
+
+    private boolean compareAndReturnResult(List answer, List input) {
         int ball = 0;
         int strike = 0;
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                if(answer.get(i) == input.get(j) && i == j){
-                    strike++;
-                } else if (answer.get(i) == input.get(j) && i != j) {
-                    ball++;
-                }
+        for(int i = 0; i < input.size(); i++){
+            if (isStrike(answer, input, i)) {
+                strike++;
+            }
+            if (isBall(answer, input, i)) {
+                ball++;
             }
         }
-        return outputMessage.printResultMessage(ball,strike);
+        return outputMessage.printResultMessage(ball, strike);
     }
-    private static void play(List answer, List input){
-        while (true){
-            if (compareAndReturnResult(answer,input)){
-                break;
-            }
+
+    private boolean isStrike(List answer, List input, int index) {
+        if (answer.get(index) == input.get(index)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isBall(List answer, List input, int index) {
+        if (answer.contains(input.get(index)) && answer.get(index) != input.get(index)) {
+            return true;
+        }
+        return false;
+    }
+
+    private void play (List answer, List input){
+        while (compareAndReturnResult(answer,input)){
+            InputNumber inputNumber = new InputNumber(getNumber());
+            input = inputNumber.getInputNumber();
         }
     }
 
-    private static void endOrRestart(){
+    private void endOrRestart(){
         inputMessage.endOrRestartMessage();
         String num = Console.readLine();
         validate(num);
@@ -69,11 +84,11 @@ public class GameController {
             run();
         }
     }
-    private static void validate(String num){
+    private void validate(String num){
         isDigit(num);
         checkLengthIs1(num);
     }
-    private static boolean isDigit(String numbers){
+    private boolean isDigit(String numbers){
         for(char number: numbers.toCharArray()){
             if(!Character.isDigit(number)){
                 throw new IllegalArgumentException();
@@ -81,7 +96,7 @@ public class GameController {
         }
         return true;
     }
-    public static boolean checkLengthIs1(String numbers){
+    private boolean checkLengthIs1(String numbers){
         if(numbers.length() != 1){
             throw new IllegalArgumentException();
         }

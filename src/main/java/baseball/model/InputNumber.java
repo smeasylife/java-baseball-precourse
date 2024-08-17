@@ -14,7 +14,7 @@ public class InputNumber {
     public List<Integer> getInputNumber(){
         return inputNumber;
     }
-    private static List stringToIntList(String numbers){
+    private List stringToIntList(String numbers){
         List<Integer> numList = new ArrayList<>();
 
         for (int i = 0; numbers.length() > i; i++){
@@ -23,12 +23,12 @@ public class InputNumber {
         return numList;
     }
 
-    private static void validate(String numbers){
+    private void validate(String numbers){
         isDigit(numbers);
         checkLengthIs3(numbers);
     }
 
-    private static boolean isDigit(String numbers){
+    private boolean isDigit(String numbers){
         for(char number: numbers.toCharArray()){
             if(!Character.isDigit(number)){
                 throw new IllegalArgumentException();
@@ -36,7 +36,7 @@ public class InputNumber {
         }
         return true;
     }
-    public static boolean checkLengthIs3(String numbers){
+    public boolean checkLengthIs3(String numbers){
         if(numbers.length() != 3){
             throw new IllegalArgumentException();
         }
